@@ -120,3 +120,37 @@ else
 }
 }
 add_shortcode('productcatlog', 'productcatloglisting');
+
+
+
+
+// Custom Post type Categories List with Page Link =============================================================================================
+
+function customcatlist(){
+	
+   $args = array(
+               'taxonomy' => 'pro-categories',
+	   			'field' => 'slug',
+               'orderby' => 'name',
+               'order'   => 'ASC'
+           );
+
+   $cats = get_categories($args);
+	//print_r($cats);
+	//exit(0);
+   foreach($cats as $cat) {
+?>
+	<ul class="custul-cat">
+		<li class="cat-item-custom">
+			 <a href="<?php echo esc_url( home_url( $cat->slug ) ); ?>">
+           <?php echo $cat->name; ?>
+      </a>
+			</li>
+	</ul>
+     
+<?php
+   }
+
+}
+
+add_shortcode('catlist', 'customcatlist');
